@@ -565,6 +565,10 @@ insert:
 	}
 
 draw:
+	if (incremental) {
+		puts(text);
+		fflush(stdout);
+	}
 	drawmenu();
 }
 
@@ -788,7 +792,7 @@ setup(void)
 static void
 usage(void)
 {
-	fputs("usage: dmenu [-bfiPrv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
+	fputs("usage: dmenu [-bfiIPrv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
 	      "             [-h height] [-n number] [-it text]\n"
 	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
 	exit(1);
@@ -805,7 +809,8 @@ main(int argc, char *argv[])
 		if (!strcmp(argv[i], "-v")) {      /* prints version information */
 			puts("dmenu-"VERSION);
 			exit(0);
-		} else if (!strcmp(argv[i], "-b")) /* appears at the bottom of the screen */
+		}
+		else if (!strcmp(argv[i], "-b")) /* appears at the bottom of the screen */
 			topbar = 0;
 		else if (!strcmp(argv[i], "-f"))   /* grabs keyboard before reading stdin */
 			fast = 1;
@@ -814,7 +819,10 @@ main(int argc, char *argv[])
 		else if (!strcmp(argv[i], "-i")) { /* case-insensitive item matching */
 			fstrncmp = strncasecmp;
 			fstrstr = cistrstr;
-		} else if (!strcmp(argv[i], "-P"))   /* is the input a password */
+		}
+		else if (!strcmp(argv[i], "-I"))   /* incremental */
+			incremental = 1;
+		else if (!strcmp(argv[i], "-P"))   /* is the input a password */
 		        passwd = 1;
 		else if (!strcmp(argv[i], "-r")) /* reject input which results in no match */
 			reject_no_match = 1;
