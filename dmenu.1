@@ -10,6 +10,8 @@ dmenu \- dynamic menu
 .IR number ]
 .RB [ \-it
 .IR text ]
+.RB [ \-dy
+.IR command ]
 .RB [ \-m
 .IR monitor ]
 .RB [ \-p
@@ -74,6 +76,9 @@ preseslected item starting from 0.
 .TP
 .BI \-it " text".
 start with initial text input.
+.TP
+.BI \-dy " command".
+run command on every keypress and set dmenu options to it's output.
 .TP
 .BI \-m " monitor"
 dmenu is displayed on the monitor number supplied. Monitor numbers are starting
