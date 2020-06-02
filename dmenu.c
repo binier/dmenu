@@ -751,7 +751,7 @@ static void
 usage(void)
 {
 	fputs("usage: dmenu [-bfiPrv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
-	      "             [-h height] [-n number]\n"
+	      "             [-h height] [-n number] [-it text]\n"
 	      "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n", stderr);
 	exit(1);
 }
@@ -794,9 +794,12 @@ main(int argc, char *argv[])
 		else if(!strcmp(argv[i], "-h")) { /* minimum height of one menu line */
 			lineheight = atoi(argv[++i]);
 			lineheight = MAX(lineheight,8); /* reasonable default in case of value too small/negative */
-		} else if (!strcmp(argv[i], "-n"))   /* preselected item */
+		} else if (!strcmp(argv[i], "-n"))   /* preselected item index */
 			preselected = atoi(argv[++i]);
-		else if (!strcmp(argv[i], "-nb"))  /* normal background color */
+		else if (!strcmp(argv[i], "-it")) {   /* initial text */
+			const char * text = argv[++i];
+			insert(text, strlen(text));
+		} else if (!strcmp(argv[i], "-nb"))  /* normal background color */
 			colors[SchemeNorm][ColBg] = argv[++i];
 		else if (!strcmp(argv[i], "-nf"))  /* normal foreground color */
 			colors[SchemeNorm][ColFg] = argv[++i];
