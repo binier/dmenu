@@ -24,3 +24,6 @@ static unsigned int lineheight = 0;         /* -h option; minimum height of a me
  * for example: " /?\"&[]"
  */
 static const char worddelimiters[] = " ";
+
+/* -n option; preselected item starting from 0 */
+static unsigned int preselected = 0;
